@@ -1,0 +1,160 @@
+<section id="lead">
+    <div class="container pt-20">
+        <div class="section-content" style="    padding-bottom: 70px;">
+            <div class="row">
+                <div class="col-md-6">
+                    <img class="img-fullwidth hidden-md" src="http://engagex.tridotstech.com/files/2.png" alt="">
+                    <img class="img-fullwidth hidden-xs hidden-sm hidden-lg" src="http://engagex.tridotstech.com/files/2.png" alt="">
+                </div>
+                <div class="col-md-6">
+                    <div class="p-30 mt-0 bg-silver-light">
+                        <h3 class="font-28 mt-0"><span class="text-theme-colored2">Choose</span> Your Course </h3>
+                        <!-- Appilication Form Start-->
+                        <form id="reservation_form" name="reservation_form" class="reservation-form mt-20" novalidate="novalidate">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group mb-20">
+                                        <input placeholder="Enter Name" id="lead_name" name="lead_name" required="" class="form-control" aria-required="true" type="text">
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group mb-20">
+                                        <input placeholder="Email" id="lead_email" name="lead_email" class="form-control" required="" aria-required="true" type="text">
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group mb-20">
+                                        <input placeholder="Phone" id="lead_mobile" name="lead_mobile" class="form-control" required="" aria-required="true" type="text">
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group mb-20">
+                                        <div class="styled-select">
+                                            <select id="campaign_name" name="campaign_name" class="form-control" required="" aria-required="true">
+                                                <option value="">Choose Course</option>
+                                                {% for item in campaign_list %}
+                                                <option value="{{item.campaign_name}}">{{item.campaign_name}}</option>
+                                                {% endfor %}
+                                            </select>
+                                            <!-- <i class="fa fa-caret-down"></i> -->
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--        <div class="col-sm-6">
+                                    <div class="form-group mb-20">
+                                        <input name="Date Of Birth" class="form-control required date-picker" placeholder="Date Of Birth" aria-required="true" type="text">
+                                    </div>
+                                </div> -->
+                                <div class="col-sm-12">
+                                    <div class="form-group mb-0 mt-10">
+                                        <input name="form_botcheck" class="form-control" value="" type="hidden">
+                                        <button type="button" onclick="submit_lead()" class="btn btn-colored btn-theme-colored2 text-white btn-lg btn-block" data-loading-text="Please wait...">Submit Request</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <!-- Application Form End-->
+                        <!-- Application Form Validation Start-->
+                        <!--               <script>
+                  $("#reservation_form").validate({
+                    submitHandler: function(form) {
+                      var form_btn = $(form).find('button[type="submit"]');
+                      var form_result_div = '#form-result';
+                      $(form_result_div).remove();
+                      form_btn.before('&amp;lt;div id="form-result" class="alert alert-success" role="alert" style="display: none;"&amp;gt;&amp;lt;/div&amp;gt;');
+                      var form_btn_old_msg = form_btn.html();
+                      form_btn.html(form_btn.prop('disabled', true).data("loading-text"));
+                      $(form).ajaxSubmit({
+                        dataType:  'json',
+                        success: function(data) {
+                          if( data.status == 'true' ) {
+                            $(form).find('.form-control').val('');
+                          }
+                          form_btn.prop('disabled', false).html(form_btn_old_msg);
+                          $(form_result_div).html(data.message).fadeIn('slow');
+                          setTimeout(function(){ $(form_result_div).fadeOut('slow') }, 6000);
+                        }
+                      });
+                    }
+                  });
+                </script> -->
+                        <!-- Application Form Validation Start -->
+                        <!-- ?utm_affiliate_id=AF-00003&?utm_user=rajashree@gmail.com&utm_medium=Website&utm_source="whats app&utm_campaign=Instution Promotion 3#lead
+
+                         -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script type="text/javascript">
+function submit_lead() {
+    // frappe.freeze('Submitting')
+    var get_query_params = frappe.utils.get_query_params();
+
+
+    frappe.call({
+        method: "frappe.website.doctype.web_form.web_form.accept",
+        args: {
+            web_form: 'lead-form',
+            data: {
+                "lead_name": $('#lead_name').val(),
+                "email_id": $('#lead_email').val(),
+                "mobile_no": $('#lead_mobile').val(),
+                "contact_number": $('#lead_mobile').val(),
+                "campaign_name": $('#campaign_name').val(),
+                "source": "Campaign",
+                "referred_from": get_query_params.utm_source,
+                "user": get_query_params.utm_affiliate_id,
+                "ip_address": "204.46.48.663",
+                "advertisement": get_query_params.utm_campaign,
+                "lead_owner": get_query_params.utm_user,
+                "doctype": "Lead"
+            }
+
+        },
+        callback: function(r) {
+            // frappe.unfreeze();
+            console.log(r);
+            if (r.message) {
+                frappe.msgprint('We will contact Soon', 'Success');
+
+                $('#lead_name').val('');
+                $('#lead_email').val('');
+                $('#lead_mobile').val('');
+
+
+
+
+                frappe.call({
+                    method: "frappe.website.doctype.web_form.web_form.accept",
+                    args: {
+                        web_form: 'reward-point-form',
+                        data: {
+                            "user": get_query_params.utm_affiliate_id,
+                            "advertisement": get_query_params.utm_campaign,
+                            "doctype": "Reward Point"
+                        }
+
+                    },
+                    callback: function(r) {
+                        // frappe.unfreeze();
+                        console.log(r);
+                        if (r.message) {
+                            // frappe.msgprint('We will contact Soon', 'Success');
+
+                        }
+                    }
+                });
+
+
+
+
+
+
+            }
+        }
+    });
+}
+</script>

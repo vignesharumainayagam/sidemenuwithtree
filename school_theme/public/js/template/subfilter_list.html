@@ -1,0 +1,15 @@
+
+                      <ul class="treeview-menu" >
+
+ 					{%  for (var j=0; j < results.length; j++) { var section = results[j]; %}
+
+                    <li >
+                        <a onclick="select_multi_filter(this)" data-id="{{section.value}}"  style="float: left; width: 100%;">
+                            <i class="fa fa-angle-right" style="    float: left; margin-top: 3px;    width: 13px;"></i>	
+                          <span style="white-space: normal; float: left; width: calc(100% - 25px); margin-left: 5px;margin-left: 0px; font-size: 12px;    "> {{section.value}}</span>
+
+                    </a>
+                    </li>
+                  
+                    {% } %}
+                      </ul>

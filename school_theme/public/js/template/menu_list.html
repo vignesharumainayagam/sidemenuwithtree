@@ -1,0 +1,35 @@
+ {%  for (var i=0; i< menuitems.length; i++) {   var item = menuitems[i]; var icon =["fa-id-badge","fa-ravelry","fa-superpowers","fa-thermometer-quarter","fa-id-card-o","fa-grav","fa-address-card","fa-handshake-o","fa-address-card","fa-user-circle","fa-linode","fa-bars","fa-binoculars","fa-bell-o","fa-bar-chart","fa-bell-slash","fa-building","fa-calendar-check-o","fa-commenting","fa-cube","fa-cubes","fa-map-o"]; if(!item.icon){item.icon = icon[Math.floor(Math.random() * 21)]} %}
+<li class="treeview " >
+    <a   id="{{item.label}}"  style="float: left; width: 99%;">
+                    <i class="fa {{item.icon}}" style="    float: left; margin-top: 3px;"></i> 
+                    <span style="white-space: normal; float: left; width: calc(100% - 25px); margin-left: 5px;    padding-right: 23px;"> {{item.label}}</span>
+                      <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                    <!-- <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span> -->
+ 				<!-- {%  for (var j=0, h=item.items.length; j < h; j++) {   var kk = item.items;  %} -->
+ 				</a>
+                      <ul class="treeview-menu" style="        margin-left: -5px;">
+
+ 					{%  for (var j=0; j < item.items.length; j++) { var section = item.items[j]; %}
+
+                    <li >
+                        <a onclick="gotolist(this,event)" id="#{{section.route}}"  style="float: left; width: 100%;    background: #eaeaea;">
+                            <i class="fa fa-angle-right" style="    float: left; margin-top: 3px;    width: 13px;"></i>	
+                        <!-- {{ section.label || __(section.name) }} -->
+                          <span style="white-space: normal; float: left; width: calc(100% - 25px); margin-left: 5px;margin-left: 0px; font-size: 12px;  color: #484848;  "> {{section.label}}</span>
+
+                    </a>
+                    </li>
+                  
+                    {% } %}
+                      </ul>
+                
+</li>
+{% } %}
+
+
+
+

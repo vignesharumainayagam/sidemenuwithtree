@@ -1,0 +1,23 @@
+{
+    "css/school_theme.min.css": [
+        "public/css/school_theme.css",
+        "public/css/skin-blue.css",
+        "public/css/custom.css",
+        "public/css/temp.css"
+    ],
+    "js/school_theme.min.js": [
+        "public/js/school_theme.js",
+        "public/js/custom.js"
+
+    ],
+    "js/school_theme-template.min.js": [
+        "public/js/template/main-sidebar1.html",
+        "public/js/template/tab_list.html",
+        "public/js/template/parent_menu.html",
+        "public/js/template/menu_list.html",
+        "public/js/template/filter_list.html",
+        "public/js/template/multifilter_list.html",
+        "public/js/template/subfilter_list.html"
+    ]
+
+}

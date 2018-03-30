@@ -1,0 +1,18 @@
+ {%  for (var i=0; i< multifilter.length; i++) {   var item = multifilter[i];  %}
+<li class="treeview {% if (i === 0) { %} active  {% } %}" >
+    <a    id="{{item.field}}"  filter-doc="{{item.name}}" filter-field="{{item.field}}"   style="float: left; width: 100%;background: #9e9e9e; color: white; height: 31px; padding-top: 5px;" onclick="get_filters(this)">
+                  
+                    <span style=" margin-left: 5px;  ">Based On {{item.name}}</span>
+                      <span class="pull-right-container">
+                        <i class="fa fa-sort-desc pull-right"></i>
+                    </span>
+                    <!-- <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span> -->
+ 				<!-- {%  for (var j=0, h=item.items.length; j < h; j++) {   var kk = item.items;  %} -->
+ 				</a>
+ 		
+
+                
+</li>
+{% } %}

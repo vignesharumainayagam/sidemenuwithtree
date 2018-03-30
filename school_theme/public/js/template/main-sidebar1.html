@@ -1,0 +1,46 @@
+<aside class="main-sidebar" style="border-right: 1px solid #d1d8dd;position: fixed;    z-index: 1020; padding-top: 0; margin-top: 51px; ">
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar row">
+        <!-- sidebar menu: : style can be found in sidebar.less -->
+        <div class="zm_apps" style="display: block; top: 70px; background: rgb(68, 68, 68); color: white;">
+            <ul class="zmApps">
+             </ul>
+        </div>
+
+        <div class="zm_tab">
+            <ul class="nav nav-tabs SCl SC_show" style="display: block !important;    border-left: 1px solid #dddddd;left: 0px; width: 281px;height: 70px;">
+                <li class="active col-md-6  col-xs-4 "  style="      padding: 0;  height: 66px;">
+                    <a data-toggle="tab" href="#_menu11" style="border-radius: 0;margin-right: 0;    border-left: 0;    height: 70px;     font-size: 15px;    text-align: center; " onclick="menutab()">
+                    <i class=" menu_icon octicon octicon-broadcast" style="width: 100%;"></i>Menu</a>
+                </li>
+                <li  class=" col-md-6  col-xs-4" style="       padding: 0; height: 66px;">
+                    <a id="filterid" data-toggle="tab" href="#_menu22" style="border-radius: 0;  font-size: 15px;    text-align: center;    height: 70px;    margin-right: 0;" onclick="filtertab()"><i class="  menu_icon octicon octicon-mortar-board" style="width: 100%;"></i><span>Filters</span></a>
+                </li> 
+               <li  class="col-xs-4 visible-xs" style="      padding: 0;  height: 66px;">
+                    <a data-toggle="tab" href="#_menu33" style="border-radius: 0;  font-size: 15px;    text-align: center;    height: 70px;    margin-right: 0;" onclick="filtertab()"><i class="  menu_icon octicon octicon-settings" style="width: 100%;"></i>more</a>
+                </li>
+             
+            </ul>
+            <ul class="sidebar-menu SCl SC_show " id="menu123" style="    top: 70px;">
+                <div class="tab-content">
+                    <div id="_menu11" class="tab-pane fade in active" style="">
+                        <div class="menu_result" style="overflow:auto;">
+                            <!-- {{frappe.render_template("menu_list",{menuitems:menuitems})}} -->
+                        </div>
+                    </div>
+                    <div id="_menu22" class="tab-pane fade ">
+                        <div class="filter_list" style="padding: 0px;overflow: auto;">
+                        </div>
+                    </div>
+                     <div id="_menu33" class="tab-pane fade layout-side-section visible-xs">
+                      
+                    </div>
+                </div>
+                <!-- <li class="header" x`>WELCOME ADMIN </li> -->
+            </ul>
+        </div>
+    </section>
+    <!-- /.sidebar -->
+</aside>
+<div class="overlay">
+    <div>

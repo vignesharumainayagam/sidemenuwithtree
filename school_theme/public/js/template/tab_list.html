@@ -1,0 +1,22 @@
+
+ {%  for (var i=0, l=tablist.length; i < l; i++) {   var u = tablist[i];  %}
+
+   	<div href="#Form/{{doctype}}/{{u.name}}" data-link="Form/{{doctype}}/{{u.name}}" onclick="detailfield(this)" style="padding:12px;    border-bottom: 1px solid #e6e2e2;">
+        	<h2 style="    font-size: 12px; font-weight: 500; margin: 0;  color: #333;"><strong>{{ u[subject] }} </strong></h2>
+       	{% if(u.status){  %}
+            <p style="     font-size: 12px; color: #263238; margin: 0;   overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"><span class="small"><span class="indicator red">
+								{{u.status}}
+								</span></span></p>
+            	{% } %} 
+    
+            </div>
+
+{% } %}
+
+{% if(tablist.length > 20){  %}
+			<div style="    text-align: center; margin-top: 19px;">
+		<!-- 		<button type="button" class="btn btn-default btn-sm" >  
+			  Load More   
+			</button> -->
+			</div>
+			{% } %}

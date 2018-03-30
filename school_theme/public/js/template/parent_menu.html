@@ -1,0 +1,7 @@
+ {%  for (var i=0, l=parent_item.length; i < l; i++) {   var item = parent_item[i];  %}
+         <li  onclick="change_menu(this)" id="{{item.module_name}}">
+                    <i class=" menu_icon {{item.icon}}"></i>
+                    <span class="lAppLbl">{{item._label}}</span>
+                   
+                </li>
+{% } %}

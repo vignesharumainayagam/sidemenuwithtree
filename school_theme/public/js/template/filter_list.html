@@ -1,0 +1,18 @@
+ {%  for (var i=0, l=results.length; i < l; i++) {   var item = results[i];  %}
+
+   	<div style="padding:12px;    border-bottom: 1px solid #e6e2e2;    cursor: pointer;" onclick="select_filter(this)" data-id="{{item.value}}">
+        	<h2 style="    font-size: 12px; font-weight: 500; margin: 0;  color: #333;"><strong>{{item.value}}</strong></h2>
+       
+            <p style="     font-size: 12px; color: #263238; margin: 0;   overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"><span class="small">{{item.description}}</span></p>
+    
+            </div>
+
+{% } %}
+
+	{% if(results.length == 0){ %}
+
+
+	<p>No Filter Found</p>
+
+
+	{%  } %}
