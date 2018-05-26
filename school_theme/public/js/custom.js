@@ -224,42 +224,7 @@ function exec_multifilter(cur_doc) {
     });
 }
 
-function exec_treefilter() {
-    var options = { doctype: "Item" };
-    var treeview = {
-        get_tree_nodes: "erpnext.stock.doctype.item.item.get_children",
-        add_tree_node: "erpnext.stock.doctype.item.item.add_node",
-        breadcrumb: "Planned Maintenance System",
-        get_tree_root: false,
-        root_label: "All Items",
-        ignore_fields: ["parent_item"],
-        onload: function(me) {
-            frappe.treeview_settings['Item'].page = {};
-            $.extend(frappe.treeview_settings['Item'].page, me.page);
-            me.make_tree();
-            // $(".btn-primary").hide();
-        },
 
-        extend_toolbar: false,
-
-    }
-    $.extend(options, treeview);
-    var tpo = new frappe.views.FilterTreeView(options);
-    $('.filter_list').html(tpo.tree.wrapper);
-    setTimeout(function() {
-
-        $('.main-sidebar a[href="#_menu22"]').tab('show');
-        $('.SCl').css({ 'width': "280px" });
-        $('.SCl').css({ 'left': "0px" });
-        $('.zm_apps').css({ 'display': "none" });
-        // $('.filter_list').css('height', $(window).height() - 100);
-        $('.filter_list').slimScroll({
-            height: ($(window).height() - 120)
-        });
-    }, 100);
-
-
-}
 
 
 function get_filters(that) {
@@ -591,7 +556,7 @@ frappe.ui.form.Tab = Class.extend({
             // if (d.type == 'Status') {
             //     this.fields.push( 'status');
             //     this.cur_fields.push({ 'status': 'status' });
-            // }  ..
+            // }  
             if (d.type == 'Field') {
                 this.fields.push(d.df.fieldname);
                 this.cur_fields.push({ 'field': d.df.fieldname });
@@ -1029,3 +994,39 @@ $(document).on("form-refresh", function(e, frm) {
 
 
 });
+function exec_treefilter() {
+    var options = { doctype: "Item" };
+    var treeview = {
+        get_tree_nodes: "erpnext.stock.doctype.item.item.get_children",
+        add_tree_node: "erpnext.stock.doctype.item.item.add_node",
+        breadcrumb: "Planned Maintenance System",
+        get_tree_root: false,
+        root_label: "All Items",
+        ignore_fields: ["parent_item"],
+        onload: function(me) {
+            frappe.treeview_settings['Item'].page = {};
+            $.extend(frappe.treeview_settings['Item'].page, me.page);
+            me.make_tree();
+            // $(".btn-primary").hide();
+        },
+
+        extend_toolbar: false,
+
+    }
+    $.extend(options, treeview);
+    var tpo = new frappe.views.FilterTreeView(options);
+    $('.filter_list').html(tpo.tree.wrapper);
+    setTimeout(function() {
+
+        $('.main-sidebar a[href="#_menu22"]').tab('show');
+        $('.SCl').css({ 'width': "280px" });
+        $('.SCl').css({ 'left': "0px" });
+        $('.zm_apps').css({ 'display': "none" });
+        // $('.filter_list').css('height', $(window).height() - 100);
+        $('.filter_list').slimScroll({
+            height: ($(window).height() - 120)
+        });
+    }, 100);
+
+
+}
