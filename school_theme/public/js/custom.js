@@ -634,8 +634,8 @@ frappe.views.FilterTreeView = Class.extend({
         this.page_name = frappe.get_route_str();
         this.get_tree_nodes = me.opts.get_tree_nodes || "frappe.desk.treeview.get_children";
 
-        // this.get_permissions();
-        // this.make_page();
+        this.get_permissions();
+        this.make_page();
         this.make_filters();
 
         if (me.opts.get_tree_root) {
@@ -643,7 +643,7 @@ frappe.views.FilterTreeView = Class.extend({
         }
 
         this.onload();
-        // this.set_menu_item();
+        this.set_menu_item();
         this.set_primary_action();
     },
     get_permissions: function() {
