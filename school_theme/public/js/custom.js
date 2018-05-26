@@ -1014,7 +1014,7 @@ function exec_treefilter() {
 
     }
     $.extend(options, treeview);
-    var tpo = new frappe.views.FilterTreeView(options);
+    var tpo = new frappe.views.TreeView(options);
     $('.filter_list').html(tpo.tree.wrapper);
     setTimeout(function() {
 
