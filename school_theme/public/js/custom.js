@@ -747,6 +747,9 @@ frappe.views.FilterTreeView = Class.extend({
     },
     select_node: function(node) {
         var me = this;
+        
+        $('.layout-main-section').find('input[data-fieldname="parent_item"]').val('');
+
         frappe.set_route("List", cur_list.doctype, {
             'parent_item': node.title
         });
