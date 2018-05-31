@@ -1,0 +1,18 @@
+
+   	<div style="padding:12px;    border-bottom: 1px solid #e6e2e2;    background: #6e4fca;">
+        	<h2 style="    font-size: 12px; font-weight: 500; margin: 0;  color: white;">
+        	<strong>ISM Forms </strong>
+        	</h2>
+            </div>
+
+
+ {%  for (var i=0, l=ismlist.length; i < l; i++) {   var u = ismlist[i];  %}
+
+   	<div href="#List/{{u.name}}" data-link="List/{{u.name}}" onclick="gotoism(this)" style="padding:12px;    border-bottom: 1px solid #e6e2e2;">
+        	<h2 style="    font-size: 12px; font-weight: 500; margin: 0;  color: #333;">
+        	<strong>{{ u.name }} </strong>
+        	</h2>
+            </div>
+
+{% } %}
+

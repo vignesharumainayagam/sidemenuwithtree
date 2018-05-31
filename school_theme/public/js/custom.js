@@ -69,7 +69,25 @@ function change_menu(that) {
         // m.data = r.message.data;
         process_data($(that).attr('id'), m.data);
         $('.menu_result').empty();
+        if ($(that).attr('id') == 'ismform') {
 
+            var ismdata = m.data[0].items;
+            $('aside').find('.tab-content').find('.filter_list').html(frappe.render_template("ismform_filter", { "ismlist": ismdata }))
+            setTimeout(function() {
+
+                $('.main-sidebar a[href="#_menu22"]').tab('show');
+                $('.SCl').css({ 'width': "280px" });
+                $('.SCl').css({ 'left': "0px" });
+                $('.zm_apps').css({ 'display': "none" });
+                // $('.filter_list').css('height', $(window).height() - 100);
+                $('.filter_list').slimScroll({
+                    height: ($(window).height() - 120)
+                });
+            }, 100);
+
+
+
+        }
         $('.menu_result').append(frappe.render_template("menu_list", { menuitems: m.data }))
 
     } else {
@@ -89,7 +107,33 @@ function change_menu(that) {
                 process_data($(that).attr('id'), m.data);
                 $('.menu_result').empty();
 
-                $('.menu_result').append(frappe.render_template("menu_list", { menuitems: m.data }))
+                console.log(m.data);
+
+                if ($(that).attr('id') == 'ismform') {
+
+                    var ismdata = m.data[0].items;
+                    $('aside').find('.tab-content').find('.filter_list').html(frappe.render_template("ismform_filter", { "ismlist": ismdata }))
+                    setTimeout(function() {
+
+                        $('.main-sidebar a[href="#_menu22"]').tab('show');
+                        $('.SCl').css({ 'width': "280px" });
+                        $('.SCl').css({ 'left': "0px" });
+                        $('.zm_apps').css({ 'display': "none" });
+                        // $('.filter_list').css('height', $(window).height() - 100);
+                        $('.filter_list').slimScroll({
+                            height: ($(window).height() - 120)
+                        });
+                    }, 100);
+
+
+
+                }
+
+
+                $('.menu_result').append(frappe.render_template("menu_list", { menuitems: m.data }));
+
+
+
 
 
             }
@@ -103,6 +147,15 @@ function change_menu(that) {
 
 }
 
+function gotoism(that) {
+    // $('.filter_list').find('.sel').removeClass('sel');
+    $(that).parent().parent().find('.sel').removeClass('sel');
+
+    $(that).addClass('sel');
+    // $(that).addClass('sel');
+    $('body').removeClass('sidebar-open');
+    location.href = $(that).attr('href')
+}
 
 
 function gotolist(that, e) {
@@ -743,11 +796,11 @@ frappe.views.FilterTreeView = Class.extend({
             onrender: me.opts.onrender,
             onclick: function(node) { me.select_node(node) },
         });
-        cur_tree = this.tree;
+
     },
     select_node: function(node) {
         var me = this;
-        
+
         $('.layout-main-section').find('input[data-fieldname="parent_item"]').val('');
 
         frappe.set_route("List", cur_list.doctype, {
@@ -997,6 +1050,7 @@ $(document).on("form-refresh", function(e, frm) {
 
 
 });
+
 function exec_treefilter() {
     var options = { doctype: "Item" };
     var treeview = {
