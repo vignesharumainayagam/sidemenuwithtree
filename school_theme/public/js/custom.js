@@ -162,6 +162,7 @@ function gotolist(that, e) {
     $('#filterid').children(":last").text('filters')
 
     frappe.set_route($(that).attr('id'));
+    console.log($(that).html());
     $(that).parent().parent().find('.sel').removeClass('sel');
 
     $(that).addClass('sel');
@@ -676,10 +677,14 @@ frappe.ui.form.Tab = Class.extend({
 
 
 frappe.views.FilterTreeView = Class.extend({
-    init: function(opts) {
-        var me = this;
+    init: function(opts,pagename,columnfilter) {
 
+        var me = this;
+        console.log(pagename);
+            console.log(columnfilter);
         this.opts = {};
+        this.pagename=pagename;
+        this.columnfilter=columnfilter;
         this.opts.get_tree_root = true;
         $.extend(this.opts, opts);
         this.doctype = opts.doctype;
@@ -800,11 +805,12 @@ frappe.views.FilterTreeView = Class.extend({
     },
     select_node: function(node) {
         var me = this;
-
-        $('.layout-main-section').find('input[data-fieldname="parent_item"]').val('');
-
+       console.log(me.columnfilter);
+        if(me.pagename!='details')
+        {
+        $('.layout-main-section').find('input[data-fieldname="'+me.columnfilter+'"]').val('');
         frappe.set_route("List", cur_list.doctype, {
-            'parent_item': node.title
+            [me.columnfilter]: node.title
         });
         if (this.opts.click) {
             this.opts.click(node);
@@ -812,6 +818,14 @@ frappe.views.FilterTreeView = Class.extend({
         if (this.opts.view_template) {
             this.node_view.empty();
             $(frappe.render_template(me.opts.view_template, { data: node.data, doctype: me.doctype })).appendTo(this.node_view);
+        }
+        }
+
+        
+        if(me.pagename=='details')
+        {
+           
+             frappe.set_route("Form", "Item", node.label);
         }
     },
     get_toolbar: function() {
@@ -1029,29 +1043,29 @@ frappe.views.FilterTreeView = Class.extend({
 });
 
 
-$(document).on("form-refresh", function(e, frm) {
+// $(document).on("form-refresh", function(e, frm) {
 
-    this.frm = frm;
-
-
-    $(this.frm.$wrapper).find('.layout-side-section').addClass('add_height');
-    this.sidebar = $(this.frm.$wrapper).find('.form-sidebar');
-    this.parent = $(this.frm.$wrapper).find('.form-sidebar').parent();
-    filtertab();
-
-    this.frm.tab = new frappe.ui.form.Tab({
-        frm: this.frm,
-        sidebar: this.sidebar,
-        parent: this.parent
-    });
-    this.frm.tab.refresh();
+//     this.frm = frm;
 
 
+//     $(this.frm.$wrapper).find('.layout-side-section').addClass('add_height');
+//     this.sidebar = $(this.frm.$wrapper).find('.form-sidebar');
+//     this.parent = $(this.frm.$wrapper).find('.form-sidebar').parent();
+//     filtertab();
+
+//     this.frm.tab = new frappe.ui.form.Tab({
+//         frm: this.frm,
+//         sidebar: this.sidebar,
+//         parent: this.parent
+//     });
+//     this.frm.tab.refresh();
 
 
-});
 
-function exec_treefilter() {
+
+// });
+
+function exec_treefilter(pagename,columnfilter) {
     var options = { doctype: "Item" };
     var treeview = {
         get_tree_nodes: "erpnext.stock.doctype.item.item.get_children",
@@ -1061,8 +1075,8 @@ function exec_treefilter() {
         root_label: "All Items",
         ignore_fields: ["parent_item"],
         onload: function(me) {
-            frappe.treeview_settings['Item'].page = {};
-            $.extend(frappe.treeview_settings['Item'].page, me.page);
+            // frappe.treeview_settings['Item'].page = {};
+            // $.extend(frappe.treeview_settings['Item'].page, me.page);
             me.make_tree();
             // $(".btn-primary").hide();
         },
@@ -1071,7 +1085,7 @@ function exec_treefilter() {
 
     }
     $.extend(options, treeview);
-    var tpo = new frappe.views.FilterTreeView(options);
+    var tpo = new frappe.views.FilterTreeView(options,pagename,columnfilter);
     $('.filter_list').html(tpo.tree.wrapper);
     setTimeout(function() {
 
