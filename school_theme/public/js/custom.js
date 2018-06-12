@@ -805,8 +805,9 @@ frappe.views.FilterTreeView = Class.extend({
     },
     select_node: function(node) {
         var me = this;
-       console.log(me.columnfilter);
-        if(me.pagename!='details')
+        var a = window.location.hash;
+       console.log(frappe._cur_route);
+        if(a.includes('List'))
         {
         $('.layout-main-section').find('input[data-fieldname="'+me.columnfilter+'"]').val('');
         frappe.set_route("List", cur_list.doctype, {
@@ -822,10 +823,10 @@ frappe.views.FilterTreeView = Class.extend({
         }
 
         
-        if(me.pagename=='details')
+        if(a.includes('Form'))
         {
-           
-             frappe.set_route("Form", "Item", node.label);
+            // window.location.hash = 'Form/Item/'+node.label
+             // frappe.set_re_route("Form", "Item", node.label);
         }
     },
     get_toolbar: function() {
@@ -1043,27 +1044,27 @@ frappe.views.FilterTreeView = Class.extend({
 });
 
 
-// $(document).on("form-refresh", function(e, frm) {
+$(document).on("form-refresh", function(e, frm) {
 
-//     this.frm = frm;
-
-
-//     $(this.frm.$wrapper).find('.layout-side-section').addClass('add_height');
-//     this.sidebar = $(this.frm.$wrapper).find('.form-sidebar');
-//     this.parent = $(this.frm.$wrapper).find('.form-sidebar').parent();
-//     filtertab();
-
-//     this.frm.tab = new frappe.ui.form.Tab({
-//         frm: this.frm,
-//         sidebar: this.sidebar,
-//         parent: this.parent
-//     });
-//     this.frm.tab.refresh();
+    this.frm = frm;
 
 
+    $(this.frm.$wrapper).find('.layout-side-section').addClass('add_height');
+    this.sidebar = $(this.frm.$wrapper).find('.form-sidebar');
+    this.parent = $(this.frm.$wrapper).find('.form-sidebar').parent();
+    filtertab();
+
+    this.frm.tab = new frappe.ui.form.Tab({
+        frm: this.frm,
+        sidebar: this.sidebar,
+        parent: this.parent
+    });
+    this.frm.tab.refresh();
 
 
-// });
+
+
+});
 
 function exec_treefilter(pagename,columnfilter) {
     var options = { doctype: "Item" };
@@ -1085,6 +1086,7 @@ function exec_treefilter(pagename,columnfilter) {
 
     }
     $.extend(options, treeview);
+    
     var tpo = new frappe.views.FilterTreeView(options,pagename,columnfilter);
     $('.filter_list').html(tpo.tree.wrapper);
     setTimeout(function() {
@@ -1097,7 +1099,53 @@ function exec_treefilter(pagename,columnfilter) {
         $('.filter_list').slimScroll({
             height: ($(window).height() - 120)
         });
+        $(".filter_list").css("overflow-x","auto");
     }, 100);
 
 
+}
+function RunningHrsEquipmentList()
+{
+       frappe.call({
+        method: "frappe.client.get_list",
+        args: {
+            doctype: "Item",
+            fields: ["item_name", "last_update_date", "running_hours", "item_code"],
+            filters: {
+                "running_hour_based": 1
+            },
+            limit_page_length: 2000
+        },
+        callback: function(r) {
+           var bindHtml='<ul style="padding: 0">';
+           $.each(r.message, function(i, d) {
+           bindHtml+='<li style="list-style:none;/* margin-bottom: 10px; */padding: 12px;border-bottom: 1px solid #e6e2e2;font-size: 14px;font-weight: 500;margin: 0;color: #333;"><a data-value="'+d.item_code+'" id="RunningHrsEquip-'+i+'" class="RunningHrsEquip" onclick="GetEquipmentRunninghRs('+i+')"><i class="fa fa-angle-right" style="margin-right:5px;" aria-hidden="true"></i>'+d.item_name+'</a></li>';
+           });
+           bindHtml+='</ul>';
+           $('.filter_list').html(bindHtml);
+             setTimeout(function() {
+
+        $('.main-sidebar a[href="#_menu22"]').tab('show');
+        $('.SCl').css({ 'width': "280px" });
+        $('.SCl').css({ 'left': "0px" });
+        $('.zm_apps').css({ 'display': "none" });
+        // $('.filter_list').css('height', $(window).height() - 100);
+        $('.filter_list').slimScroll({
+            height: ($(window).height() - 120)
+        });
+        $(".filter_list").css("overflow-x","auto");
+    }, 100);
+
+        }
+    });
+}
+
+function GetEquipmentRunninghRs(id)
+{
+    var item=$("#RunningHrsEquip-"+id).attr("data-value");
+    console.log(item);
+    $('.layout-main-section').find('input[data-fieldname="equipment_name"]').val('');
+    frappe.set_route("List", cur_list.doctype, {
+            'equipment_name': item
+     });
 }
