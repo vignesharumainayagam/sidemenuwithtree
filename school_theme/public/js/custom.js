@@ -807,8 +807,8 @@ frappe.views.FilterTreeView = Class.extend({
         var me = this;
         var a = window.location.hash;
        console.log(frappe._cur_route);
-        if(a.includes('List'))
-        {
+        // if(me.page=='list')
+        // {
         $('.layout-main-section').find('input[data-fieldname="'+me.columnfilter+'"]').val('');
         frappe.set_route("List", cur_list.doctype, {
             [me.columnfilter]: node.title
@@ -820,7 +820,7 @@ frappe.views.FilterTreeView = Class.extend({
             this.node_view.empty();
             $(frappe.render_template(me.opts.view_template, { data: node.data, doctype: me.doctype })).appendTo(this.node_view);
         }
-        }
+        // }
 
         
         if(a.includes('Form'))
