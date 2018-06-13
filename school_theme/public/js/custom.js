@@ -1106,6 +1106,7 @@ function exec_treefilter(pagename,columnfilter) {
 }
 function RunningHrsEquipmentList()
 {
+    
        frappe.call({
         method: "frappe.client.get_list",
         args: {
