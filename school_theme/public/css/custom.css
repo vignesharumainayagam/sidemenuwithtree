@@ -98,11 +98,11 @@ header .dropdown-help {
 }
 
 .main-header .logo .logo-lg {
-    background: #6f4fca url(/assets/school_theme/images/logo_bdoop.png) center no-repeat;
-    background-size: auto 48px;
-    text-indent: -99em;
+    background: #6f4fca url(http://sanmarpms.mtss.in/images/sanmar.png) center no-repeat;
+    background-size: auto 53px;
+    /* text-indent: -99em; */
+    background-position: 0px -2px;
 }
-
 .main-header .logo .logo-mini {
     background: #6f4fca url(/assets/school_theme/images/bp-ico-32.png) center no-repeat;
     background-size: auto 38px;
