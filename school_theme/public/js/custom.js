@@ -1067,6 +1067,7 @@ $(document).on("form-refresh", function(e, frm) {
 });
 
 function exec_treefilter(pagename,columnfilter) {
+    var tgo = '';
     var options = { doctype: "Item" };
     var treeview = {
         get_tree_nodes: "erpnext.stock.doctype.item.item.get_children",
