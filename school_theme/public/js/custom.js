@@ -162,7 +162,6 @@ function gotolist(that, e) {
     $('#filterid').children(":last").text('filters')
 
     frappe.set_route($(that).attr('id'));
-    console.log($(that).html());
     $(that).parent().parent().find('.sel').removeClass('sel');
 
     $(that).addClass('sel');
@@ -194,7 +193,7 @@ function gotolist(that, e) {
                     exec_multifilter(frappe.get_route()[1])
                 }
                 if (frappe.listview_settings[frappe.get_route()[1]].enable_tree) {
-                    exec_treefilter(frappe.get_route()[1])
+                    exec_treefilter(frappe.get_route()[1],frappe.get_route()[1].columnFilter)
                 }
 
 
@@ -806,12 +805,10 @@ frappe.views.FilterTreeView = Class.extend({
     select_node: function(node) {
         var me = this;
         var a = window.location.hash;
-       console.log(frappe._cur_route);
-        // if(me.page=='list')
-        // {
-        $('.layout-main-section').find('input[data-fieldname="'+me.columnfilter+'"]').val('');
+        console.log(node);
+        $('.layout-main-section').find('input[data-fieldname="'+frappe.listview_settings[frappe.get_route()[1]].columnFilter+'"]').val('');
         frappe.set_route("List", cur_list.doctype, {
-            [me.columnfilter]: node.title
+            [frappe.listview_settings[frappe.get_route()[1]].columnFilter]: node.title
         });
         if (this.opts.click) {
             this.opts.click(node);
@@ -1067,6 +1064,8 @@ $(document).on("form-refresh", function(e, frm) {
 });
 
 function exec_treefilter(pagename,columnfilter) {
+    console.log(pagename);
+    console.log(columnfilter);
     var tgo = '';
     var options = { doctype: "Item" };
     var treeview = {
@@ -1101,6 +1100,10 @@ function exec_treefilter(pagename,columnfilter) {
             height: ($(window).height() - 120)
         });
         $(".filter_list").css("overflow-x","auto");
+        $('.layout-main-section').find('input[data-fieldname="'+frappe.listview_settings[frappe.get_route()[1]].columnFilter+'"]').val('');
+        frappe.set_route("List", cur_list.doctype, {
+            [frappe.listview_settings[frappe.get_route()[1]].columnFilter]:''
+        });
     }, 100);
 
 
@@ -1136,6 +1139,10 @@ function RunningHrsEquipmentList()
             height: ($(window).height() - 120)
         });
         $(".filter_list").css("overflow-x","auto");
+        // $('.layout-main-section').find('input[data-fieldname="equipment_name"]').val('');
+        // frappe.set_route("List", cur_list.doctype, {
+        //     'equipment_name':''
+        // });
     }, 100);
 
         }
