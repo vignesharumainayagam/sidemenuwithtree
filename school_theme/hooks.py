@@ -16,12 +16,14 @@ app_include_css = [
     "/assets/school_theme/css/skin-blue.css",
     "/assets/school_theme/css/custom.css",
     "/assets/school_theme/css/temp.css",
+    "/assets/css/custom_tree.min.css"
 ]
 app_include_js = [
     "/assets/school_theme/js/school_theme.js",
     "/assets/school_theme/js/custom.js",
     "/assets/school_theme/js/nicescroll.js",
     "/assets/js/school_theme-template.min.js",
+    "/assets/js/custom_tree.min.js"
 ]
 
 # include js, css files in header of web template

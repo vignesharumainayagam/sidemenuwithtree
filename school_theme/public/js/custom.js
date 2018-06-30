@@ -356,6 +356,7 @@ function filtertab() {
     } else {
         // $('.main-sidebar a[href="#_menu11"]').tab('show');
         menutab();
+        // filtertab()
         // $('.filter_list').empty();
         // $('.main-sidebar a[href="#_menu22"]').tab('show');
         // $('.SCl').css({ 'width': "280px" });
@@ -535,7 +536,7 @@ frappe.ui.form.Tab = Class.extend({
             return;
         }
         if (frappe.get_doc('DocType', this.frm.doctype).issingle == 0) {
-            this.tab_list();
+            // this.tab_list();
 
         }
 
@@ -1040,28 +1041,31 @@ frappe.views.FilterTreeView = Class.extend({
     }
 });
 
-
-$(document).on("form-refresh", function(e, frm) {
-
-    this.frm = frm;
-
-
-    $(this.frm.$wrapper).find('.layout-side-section').addClass('add_height');
-    this.sidebar = $(this.frm.$wrapper).find('.form-sidebar');
-    this.parent = $(this.frm.$wrapper).find('.form-sidebar').parent();
-    filtertab();
-
-    this.frm.tab = new frappe.ui.form.Tab({
-        frm: this.frm,
-        sidebar: this.sidebar,
-        parent: this.parent
-    });
-    this.frm.tab.refresh();
-
-
-
+$(document).on("page-change", function() {
+    $('.filter_list').html('');
 
 });
+
+
+
+// $(document).on("form-refresh", function(e, frm) {
+
+//     this.frm = frm;
+
+
+//     $(this.frm.$wrapper).find('.layout-side-section').addClass('add_height');
+//     this.sidebar = $(this.frm.$wrapper).find('.form-sidebar');
+//     this.parent = $(this.frm.$wrapper).find('.form-sidebar').parent();
+//     filtertab();
+
+//     this.frm.tab = new frappe.ui.form.Tab({
+//         frm: this.frm,
+//         sidebar: this.sidebar,
+//         parent: this.parent
+//     });
+//     this.frm.tab.refresh();
+    
+// });
 
 function exec_treefilter(pagename,columnfilter) {
     console.log(pagename);

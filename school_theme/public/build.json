@@ -3,13 +3,18 @@
         "public/css/school_theme.css",
         "public/css/skin-blue.css",
         "public/css/custom.css",
-        "public/css/temp.css"
+        "public/css/temp.css"      
+    ],
+    "css/custom_tree.min.css":[
+        "public/js/zTree/css/zTreeStyle/zTreeStyle.css"   
     ],
     "js/school_theme.min.js": [
         "public/js/school_theme.js",
         "public/js/custom.js"
-
     ],
+    "js/custom_tree.min.js": [      
+        "public/js/zTree/js/jquery.ztree.all.js"
+    ],    
     "js/school_theme-template.min.js": [
         "public/js/template/main-sidebar1.html",
         "public/js/template/tab_list.html",
