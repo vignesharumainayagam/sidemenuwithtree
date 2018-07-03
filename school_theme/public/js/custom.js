@@ -488,8 +488,9 @@ bdtheme.set_user_background = function(src, selector, style) {
 
 frappe.templates["logo"] = '<a href="/desk" class="logo">' +
     ' <span class="logo-mini"><b>bd</b></span>' +
-    '      <span class="logo-lg"><b style="font-size:25px;margin-left: 40px;">SANMAR</b></span>' +
+    '      <span class="logo-lg"><b style="font-size:25px;margin-left: 40px;"></b></span>' +
     '    </a>';
+
 
 frappe.templates["sidebar-toggle"] = '<a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button"><i class="octicon octicon-three-bars"></i>' +
     '<span class="sr-only">Toggle navigation</span>' +
