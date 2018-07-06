@@ -27,7 +27,7 @@ app_include_js = [
 ]
 
 # include js, css files in header of web template
-web_include_css = "/assets/school_theme/css/school_theme-web.css"
+# web_include_css = "/assets/school_theme/css/school_theme-web.css"
 # Includes in <head>
 # ------------------
 
@@ -36,8 +36,9 @@ web_include_css = "/assets/school_theme/css/school_theme-web.css"
 # app_include_js = "/assets/school_theme/js/school_theme.js"
 
 # include js, css files in header of web template
-# web_include_css = "/assets/school_theme/css/school_theme.css"
-# web_include_js = "/assets/school_theme/js/school_theme.js"
+web_include_css = "/assets/css/custom_tree.min.css"
+web_include_js = "/assets/js/custom_tree.min.js"
+web_include_js = "/assets/school_theme/js/custom.js"
 
 # include js in page
 # page_js = {"page" : "public/js/file.js"}

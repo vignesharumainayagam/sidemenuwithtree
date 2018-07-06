@@ -1,3 +1,46 @@
+function taskchange(t) {
+    var status = $(t).val();
+    var task_name = $(t).attr("data-task");
+    frappe.call({
+        method: "frappe.client.set_value",
+        args: {
+            doctype: "Task",
+            name: task_name,
+            fieldname: "status",
+            value: status,
+        },
+        freeze: true,
+        callback: (r) => {
+            frappe.msgprint(__("Successfully Status Updated"));
+        },
+        error: (r) => {
+            $(t).val(status);
+            frappe.msgprint(r.message);
+        },
+    });
+}
+function bugchange(t) {
+    var status = $(t).val();
+    var bug_name = $(t).attr("data-bug");
+    frappe.call({
+        method: "frappe.client.set_value",
+        args: {
+            doctype: "Bug Sheet",
+            name: bug_name,
+            fieldname: "status",
+            value: status,
+        },
+        freeze: true,
+        callback: (r) => {
+            frappe.msgprint(__("Successfully Status Updated"));
+        },
+        error: (r) => {
+            $(t).val(status);
+            frappe.msgprint(r.message);
+        },
+    });
+}
+
 var process_data = function(module_name, data) {
     // frappe.module_links[module_name] = [];
     data.forEach(function(section) {
