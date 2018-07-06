@@ -38,7 +38,6 @@ app_include_js = [
 # include js, css files in header of web template
 web_include_css = "/assets/css/custom_tree.min.css"
 web_include_js = "/assets/js/custom_tree.min.js"
-web_include_js = "/assets/school_theme/js/custom.js"
 
 # include js in page
 # page_js = {"page" : "public/js/file.js"}
