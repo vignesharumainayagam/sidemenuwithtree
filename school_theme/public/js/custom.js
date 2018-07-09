@@ -1,3 +1,6 @@
+function clicktask(a) {
+    console.log(a);
+}
 function taskchange(t) {
     var status = $(t).val();
     var task_name = $(t).attr("data-task");
