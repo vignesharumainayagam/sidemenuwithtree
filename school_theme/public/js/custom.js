@@ -1,3 +1,34 @@
+
+function get_screen(a) {
+    console.log(a);
+    var project_name = $(a).attr("data-project_name");
+    var module_name = $(a).attr("data-module_name");
+    var screen_name = $(a).attr("data-screen_name");
+
+    var project = $(a).attr("data-project");
+    var module = $(a).attr("data-module");
+    var screen = $(a).attr("data-name");
+    frappe.call({
+        method: "pms.pms.page.employee_dashboard.employee_dashboard.get_data_screen",
+        args:{
+            project: project,
+            type: "screen",
+            id: screen,
+            module: module,
+        },
+        callback: function(r) {
+            console.log(r.message);
+            $('.curSelectedNode').removeClass('curSelectedNode');
+            
+            $(".title-text").html(project_name+
+                '<i class="fa fa-chevron-right mo" aria-hidden="true"></i>'+module_name+
+                '<i class="fa fa-chevron-right mo" aria-hidden="true"></i>'+screen_name);
+            $('.maindiv').html(frappe.render_template("screen_detail_tab", {content: r.message}));
+
+        }
+    });
+}
+
 function clicktask(a) {
     console.log(a);
 }
@@ -1090,7 +1121,6 @@ frappe.views.FilterTreeView = Class.extend({
 
 $(document).on("page-change", function() {
     $('.filter_list').html('');
-
 });
 
 
