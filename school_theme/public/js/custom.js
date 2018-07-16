@@ -1121,6 +1121,12 @@ frappe.views.FilterTreeView = Class.extend({
 
 $(document).on("page-change", function() {
     $('.filter_list').html('');
+
+    if (window.location.hash != "#employee-dashboard") {
+            $("html").css("overflow-y", "scroll");
+            $(".container").css("overflow-y", "hidden");
+    }
+
 });
 
 
