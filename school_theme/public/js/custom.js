@@ -1,3 +1,23 @@
+function taskfilterchange(b) {
+    console.log(b)
+    $(".taskside .jo li").hide();
+    $(".taskside .jo li[data-status="+b+"]").show();
+}
+function taskprioritychange(c) {
+    console.log(c)
+    $(".taskside .jo li").hide();
+    $(".taskside .jo li[data-priority="+c+"]").show();
+}
+function bugfilterchange(d) {
+    console.log(d)
+    $(".bugside .jo li").hide();
+    $(".bugside .jo li[data-status="+d+"]").show();
+}
+function bugprioritychange(e) {
+    console.log(e)
+    $(".bugside .jo li").hide();
+    $(".bugside .jo li[data-priority="+e+"]").show();
+}
 
 function get_screen(a) {
     console.log(a);
