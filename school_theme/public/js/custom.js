@@ -1,21 +1,29 @@
 function taskfilterchange(b) {
     console.log(b)
     $(".taskside .jo li").hide();
+    $(".taskside .jo li").removeClass( "active" );
+    $(".taskmain .tab-content .tab-pane").removeClass( "active" );
     $(".taskside .jo li[data-status="+b+"]").show();
 }
 function taskprioritychange(c) {
     console.log(c)
     $(".taskside .jo li").hide();
+    $(".taskside .jo li").removeClass( "active" );
+    $(".taskmain .tab-content .tab-pane").removeClass("active");    
     $(".taskside .jo li[data-priority="+c+"]").show();
 }
 function bugfilterchange(d) {
     console.log(d)
     $(".bugside .jo li").hide();
+    $(".bugside .jo li").removeClass( "active" );
+    $(".bugmain .tab-content .tab-pane").removeClass("active");
     $(".bugside .jo li[data-status="+d+"]").show();
 }
 function bugprioritychange(e) {
     console.log(e)
     $(".bugside .jo li").hide();
+    $(".bugside .jo li").removeClass( "active" );
+    $(".bugmain .tab-content .tab-pane").removeClass("active");    
     $(".bugside .jo li[data-priority="+e+"]").show();
 }
 
